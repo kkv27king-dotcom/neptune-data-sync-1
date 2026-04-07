@@ -1,3 +1,6 @@
 {
+  "cms-get": "https://functions.poehali.dev/0c232c8c-e2c7-4ca9-89c9-a79f5ec42794",
+  "cms-update": "https://functions.poehali.dev/d81c4f5f-3817-44ff-9800-d1af4f11fb9d",
+  "admin-auth": "https://functions.poehali.dev/b307c0f1-fb30-48ba-9e94-e82b5b8dac0b",
   "send-lead": "https://functions.poehali.dev/8cae795d-5611-43e6-878d-96ab29f86c26"
 }

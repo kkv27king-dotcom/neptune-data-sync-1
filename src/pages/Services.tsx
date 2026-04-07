@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import Header from "@/components/Header"
 import Icon from "@/components/ui/icon"
+import { useCms } from "@/hooks/useCms"
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -64,6 +65,7 @@ const steps = [
 ]
 
 export default function Services() {
+  const { get } = useCms("services")
   return (
     <div className="min-h-screen bg-[#020c1b] text-white">
       <Header />
@@ -83,9 +85,7 @@ export default function Services() {
           transition={{ delay: 0.1 }}
           className="text-4xl md:text-6xl font-light leading-tight mb-4"
         >
-          Всё что нужно
-          <br />
-          <span className="font-semibold text-sky-300 italic">для климата</span>
+          {get("services_title", "Всё что нужно")}
         </motion.h1>
         <motion.p
           initial={{ opacity: 0 }}
@@ -93,7 +93,7 @@ export default function Services() {
           transition={{ delay: 0.25 }}
           className="text-white/50 text-base max-w-lg"
         >
-          Полный цикл: от подбора оборудования до регулярного обслуживания. Один подрядчик — ноль забот.
+          {get("services_subtitle", "Полный цикл: от подбора оборудования до регулярного обслуживания. Один подрядчик — ноль забот.")}
         </motion.p>
       </section>
 

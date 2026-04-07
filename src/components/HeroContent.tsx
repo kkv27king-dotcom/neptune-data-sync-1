@@ -1,6 +1,11 @@
 import { motion } from "framer-motion"
+import { useCms } from "@/hooks/useCms"
 
 export default function HeroContent() {
+  const { get } = useCms("index")
+  const title = get("index_hero_title", "Климат под контролем")
+  const subtitle = get("index_hero_subtitle", "Продажа, монтаж и сервисное обслуживание кондиционеров. Гарантия на все работы. Выезд в день обращения.")
+
   return (
     <main className="absolute inset-0 z-20 flex flex-col justify-center items-start px-6 md:px-16 pt-24 pb-16 max-w-5xl mx-auto w-full">
       <div className="text-left">
@@ -19,9 +24,7 @@ export default function HeroContent() {
           transition={{ duration: 0.7, delay: 0.15 }}
           className="text-4xl sm:text-5xl md:text-7xl tracking-tight font-light text-white mb-5 leading-tight"
         >
-          <span className="font-semibold italic text-sky-300">Климат</span> под
-          <br />
-          <span className="font-light text-white">ваш контроль</span>
+          {title}
         </motion.h1>
 
         <motion.p
@@ -30,8 +33,7 @@ export default function HeroContent() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-sm font-light text-white/70 mb-8 leading-relaxed max-w-md"
         >
-          Продажа, монтаж и сервисное обслуживание кондиционеров.
-          Гарантия на все работы. Выезд в день обращения.
+          {subtitle}
         </motion.p>
 
         <motion.div

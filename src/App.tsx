@@ -10,6 +10,7 @@ import Catalog from "./pages/Catalog";
 import Services from "./pages/Services";
 import Contacts from "./pages/Contacts";
 import NotFound from "./pages/NotFound";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contacts" element={<Contacts />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
