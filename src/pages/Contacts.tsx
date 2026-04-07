@@ -127,7 +127,7 @@ export default function Contacts() {
             {[
               { icon: "Phone", title: "Телефон", value: "+7 (800) 123-45-67", sub: "Звонок бесплатный" },
               { icon: "Mail", title: "Email", value: "info@klimatpro.ru", sub: "Отвечаем в течение часа" },
-              { icon: "MapPin", title: "Адрес", value: "г. Москва, ул. Примерная, 42", sub: "Пн–Пт: 9:00–20:00" },
+              { icon: "MapPin", title: "Адрес", value: "г. Хабаровск, ул. Слободская, 16", sub: "Пн–Вс: 8:00–22:00" },
               { icon: "Clock", title: "Режим работы", value: "Пн–Вс: 8:00–22:00", sub: "Сервис 24/7" },
             ].map((c, i) => (
               <motion.div
