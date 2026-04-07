@@ -12,13 +12,34 @@ const fadeUp = {
   }),
 }
 
+const SEND_LEAD_URL = "https://functions.poehali.dev/8cae795d-5611-43e6-878d-96ab29f86c26"
+
 export default function Contacts() {
   const [form, setForm] = useState({ name: "", phone: "", message: "" })
   const [sent, setSent] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSent(true)
+    setLoading(true)
+    setError("")
+    try {
+      const res = await fetch(SEND_LEAD_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      })
+      if (res.ok) {
+        setSent(true)
+      } else {
+        setError("Не удалось отправить. Позвоните нам напрямую.")
+      }
+    } catch {
+      setError("Ошибка сети. Позвоните нам напрямую.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -105,11 +126,15 @@ export default function Contacts() {
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-sky-500 transition-colors text-sm resize-none"
                     />
                   </div>
+                  {error && (
+                    <p className="text-red-400 text-sm text-center">{error}</p>
+                  )}
                   <button
                     type="submit"
-                    className="w-full py-3 rounded-xl bg-sky-500 text-white font-medium hover:bg-sky-400 transition-colors duration-200"
+                    disabled={loading}
+                    className="w-full py-3 rounded-xl bg-sky-500 text-white font-medium hover:bg-sky-400 transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Отправить заявку
+                    {loading ? "Отправляем..." : "Отправить заявку"}
                   </button>
                 </form>
               )}
