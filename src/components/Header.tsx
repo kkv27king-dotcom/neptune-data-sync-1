@@ -35,11 +35,11 @@ export default function Header() {
 
         {/* CTA */}
         <a
-          href="/contacts"
+          href="tel:+79249358388"
           className="hidden md:inline-flex items-center gap-2 px-5 py-2 rounded-full bg-sky-500 text-white text-sm font-medium hover:bg-sky-400 transition-colors duration-200"
         >
           <Icon name="Phone" size={14} />
-          Позвонить
+          +7 (924) 935-83-88
         </a>
 
         {/* Mobile burger */}
