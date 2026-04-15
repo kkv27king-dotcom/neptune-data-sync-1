@@ -4,6 +4,7 @@ import HeroContent from "@/components/HeroContent"
 import PulsingCircle from "@/components/PulsingCircle"
 import Header from "@/components/Header"
 import Icon from "@/components/ui/icon"
+import { useCms } from "@/hooks/useCms"
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -14,41 +15,36 @@ const fadeUp = {
   }),
 }
 
-const advantages = [
-  { icon: "ShieldCheck", title: "Гарантия 5 лет", desc: "На все виды монтажных работ" },
-  { icon: "Clock", title: "Выезд в день заявки", desc: "Работаем без выходных" },
-  { icon: "BadgeCheck", title: "Официальный дилер", desc: "Daikin, Mitsubishi, Samsung" },
-  { icon: "Wrench", title: "Монтаж за 1 день", desc: "Опытная команда мастеров" },
-]
-
-const topServices = [
-  {
-    icon: "Package",
-    title: "Продажа",
-    desc: "Широкий ассортимент кондиционеров по ценам от производителя.",
-    href: "/catalog",
-  },
-  {
-    icon: "Wrench",
-    title: "Монтаж",
-    desc: "Профессиональная установка под ключ. Порядок — наш приоритет.",
-    href: "/services",
-  },
-  {
-    icon: "Settings",
-    title: "Обслуживание",
-    desc: "Чистка, заправка, диагностика. Продлим жизнь вашего оборудования.",
-    href: "/services",
-  },
-]
+const ADV_ICONS = ["ShieldCheck", "Clock", "BadgeCheck", "Wrench"]
 
 const Index = () => {
+  const { get } = useCms("index")
+
+  const advantages = [
+    { icon: ADV_ICONS[0], title: get("index_adv1_title", "Гарантия 5 лет"), desc: get("index_adv1_desc", "На все виды монтажных работ") },
+    { icon: ADV_ICONS[1], title: get("index_adv2_title", "Выезд в день заявки"), desc: get("index_adv2_desc", "Работаем без выходных") },
+    { icon: ADV_ICONS[2], title: get("index_adv3_title", "Официальный дилер"), desc: get("index_adv3_desc", "Daikin, Mitsubishi, Samsung") },
+    { icon: ADV_ICONS[3], title: get("index_adv4_title", "Монтаж за 1 день"), desc: get("index_adv4_desc", "Опытная команда мастеров") },
+  ]
+
+  const topServices = [
+    { icon: "Package", title: get("index_serv1_title", "Продажа"), desc: get("index_serv1_desc", "Широкий ассортимент кондиционеров по ценам от производителя."), href: "/catalog" },
+    { icon: "Wrench", title: get("index_serv2_title", "Монтаж"), desc: get("index_serv2_desc", "Профессиональная установка под ключ. Порядок — наш приоритет."), href: "/services" },
+    { icon: "Settings", title: get("index_serv3_title", "Обслуживание"), desc: get("index_serv3_desc", "Чистка, заправка, диагностика. Продлим жизнь вашего оборудования."), href: "/services" },
+  ]
+
+  const stats = [
+    { value: get("index_stat1_value", "500+"), label: get("index_stat1_label", "Установок в год") },
+    { value: get("index_stat2_value", "5 лет"), label: get("index_stat2_label", "Гарантия на монтаж") },
+    { value: get("index_stat3_value", "24/7"), label: get("index_stat3_label", "Сервис и поддержка") },
+  ]
+
   return (
     <div className="bg-[#020c1b]">
       {/* Hero */}
       <ShaderBackground>
         <Header />
-        <HeroContent />
+        <HeroContent stats={stats} />
         <PulsingCircle />
       </ShaderBackground>
 
@@ -57,7 +53,7 @@ const Index = () => {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {advantages.map((a, i) => (
             <motion.div
-              key={a.title}
+              key={i}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -85,7 +81,7 @@ const Index = () => {
           variants={fadeUp}
           className="text-3xl md:text-4xl font-light text-white mb-3"
         >
-          Что мы <span className="font-semibold text-sky-300 italic">делаем</span>
+          {get("index_services_title", "Что мы")} <span className="font-semibold text-sky-300 italic">делаем</span>
         </motion.h2>
         <motion.p
           initial="hidden"
@@ -101,7 +97,7 @@ const Index = () => {
         <div className="grid sm:grid-cols-3 gap-6">
           {topServices.map((s, i) => (
             <motion.a
-              key={s.title}
+              key={i}
               href={s.href}
               initial="hidden"
               whileInView="visible"
@@ -136,10 +132,10 @@ const Index = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-sky-500/5 via-transparent to-sky-500/5 pointer-events-none" />
           <h2 className="text-3xl md:text-4xl font-light text-white mb-3">
-            Получите <span className="font-semibold text-sky-300">бесплатный расчёт</span>
+            {get("index_cta_title", "Получите")} <span className="font-semibold text-sky-300">бесплатный расчёт</span>
           </h2>
           <p className="text-white/50 text-sm mb-8 max-w-md mx-auto">
-            Оставьте заявку — специалист подберёт оборудование и рассчитает стоимость монтажа.
+            {get("index_cta_desc", "Оставьте заявку — специалист подберёт оборудование и рассчитает стоимость монтажа.")}
           </p>
           <a
             href="/contacts"

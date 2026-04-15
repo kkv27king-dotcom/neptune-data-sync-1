@@ -1,10 +1,22 @@
 import { motion } from "framer-motion"
 import { useCms } from "@/hooks/useCms"
 
-export default function HeroContent() {
+type Stat = { value: string; label: string }
+
+type Props = {
+  stats?: Stat[]
+}
+
+export default function HeroContent({ stats }: Props) {
   const { get } = useCms("index")
   const title = get("index_hero_title", "Климат под контролем")
   const subtitle = get("index_hero_subtitle", "Продажа, монтаж и сервисное обслуживание кондиционеров. Гарантия на все работы. Выезд в день обращения.")
+
+  const displayStats = stats || [
+    { value: "500+", label: "Установок в год" },
+    { value: "5 лет", label: "Гарантия на монтаж" },
+    { value: "24/7", label: "Сервис и поддержка" },
+  ]
 
   return (
     <main className="absolute inset-0 z-20 flex flex-col justify-center items-start px-6 md:px-16 pt-24 pb-16 max-w-5xl mx-auto w-full">
@@ -62,11 +74,7 @@ export default function HeroContent() {
           transition={{ duration: 0.8, delay: 0.7 }}
           className="flex flex-wrap gap-6 mt-10"
         >
-          {[
-            { value: "500+", label: "Установок в год" },
-            { value: "5 лет", label: "Гарантия на монтаж" },
-            { value: "24/7", label: "Сервис и поддержка" },
-          ].map((stat) => (
+          {displayStats.map((stat) => (
             <div key={stat.label} className="text-left">
               <div className="text-2xl font-bold text-sky-300">{stat.value}</div>
               <div className="text-xs text-white/50 mt-0.5">{stat.label}</div>

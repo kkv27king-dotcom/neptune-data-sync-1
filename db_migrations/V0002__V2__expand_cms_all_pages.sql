@@ -1,0 +1,133 @@
+
+-- Главная страница: преимущества, сервисы-превью, CTA
+INSERT INTO t_p31537494_neptune_data_sync_1.cms_content (id, page, section, content_type, value) VALUES
+  ('index_adv1_title', 'index', 'adv1_title', 'text', 'Гарантия 5 лет'),
+  ('index_adv1_desc', 'index', 'adv1_desc', 'text', 'На все виды монтажных работ'),
+  ('index_adv2_title', 'index', 'adv2_title', 'text', 'Выезд в день заявки'),
+  ('index_adv2_desc', 'index', 'adv2_desc', 'text', 'Работаем без выходных'),
+  ('index_adv3_title', 'index', 'adv3_title', 'text', 'Официальный дилер'),
+  ('index_adv3_desc', 'index', 'adv3_desc', 'text', 'Daikin, Mitsubishi, Samsung'),
+  ('index_adv4_title', 'index', 'adv4_title', 'text', 'Монтаж за 1 день'),
+  ('index_adv4_desc', 'index', 'adv4_desc', 'text', 'Опытная команда мастеров'),
+  ('index_stat1_value', 'index', 'stat1_value', 'text', '500+'),
+  ('index_stat1_label', 'index', 'stat1_label', 'text', 'Установок в год'),
+  ('index_stat2_value', 'index', 'stat2_value', 'text', '5 лет'),
+  ('index_stat2_label', 'index', 'stat2_label', 'text', 'Гарантия на монтаж'),
+  ('index_stat3_value', 'index', 'stat3_value', 'text', '24/7'),
+  ('index_stat3_label', 'index', 'stat3_label', 'text', 'Сервис и поддержка'),
+  ('index_cta_title', 'index', 'cta_title', 'text', 'Получите бесплатный расчёт'),
+  ('index_cta_desc', 'index', 'cta_desc', 'text', 'Оставьте заявку — специалист подберёт оборудование и рассчитает стоимость монтажа.'),
+  ('index_services_title', 'index', 'services_title', 'text', 'Что мы делаем'),
+  ('index_serv1_title', 'index', 'serv1_title', 'text', 'Продажа'),
+  ('index_serv1_desc', 'index', 'serv1_desc', 'text', 'Широкий ассортимент кондиционеров по ценам от производителя.'),
+  ('index_serv2_title', 'index', 'serv2_title', 'text', 'Монтаж'),
+  ('index_serv2_desc', 'index', 'serv2_desc', 'text', 'Профессиональная установка под ключ. Порядок — наш приоритет.'),
+  ('index_serv3_title', 'index', 'serv3_title', 'text', 'Обслуживание'),
+  ('index_serv3_desc', 'index', 'serv3_desc', 'text', 'Чистка, заправка, диагностика. Продлим жизнь вашего оборудования.')
+ON CONFLICT (id) DO NOTHING;
+
+-- Страница услуг: карточки услуг
+INSERT INTO t_p31537494_neptune_data_sync_1.cms_content (id, page, section, content_type, value) VALUES
+  ('services_s1_title', 'services', 's1_title', 'text', 'Продажа оборудования'),
+  ('services_s1_desc', 'services', 's1_desc', 'text', 'Официальные поставки кондиционеров Daikin, Mitsubishi Electric, Samsung, LG. Широкий выбор моделей для любых задач и бюджетов.'),
+  ('services_s1_price', 'services', 's1_price', 'text', 'от 25 000 ₽'),
+  ('services_s2_title', 'services', 's2_title', 'text', 'Монтаж и установка'),
+  ('services_s2_desc', 'services', 's2_desc', 'text', 'Профессиональный монтаж под ключ за 1 день. Соблюдаем все технические нормы и требования производителя.'),
+  ('services_s2_price', 'services', 's2_price', 'text', 'от 5 000 ₽'),
+  ('services_s3_title', 'services', 's3_title', 'text', 'Сервисное обслуживание'),
+  ('services_s3_desc', 'services', 's3_desc', 'text', 'Регулярное техническое обслуживание продлевает срок службы оборудования и обеспечивает его эффективную работу.'),
+  ('services_s3_price', 'services', 's3_price', 'text', 'от 2 500 ₽'),
+  ('services_s4_title', 'services', 's4_title', 'text', 'Ремонт кондиционеров'),
+  ('services_s4_desc', 'services', 's4_desc', 'text', 'Быстрый ремонт любой сложности. Выезд в день обращения. Работаем со всеми марками и моделями.'),
+  ('services_s4_price', 'services', 's4_price', 'text', 'от 1 500 ₽'),
+  ('services_s5_title', 'services', 's5_title', 'text', 'Проектирование'),
+  ('services_s5_desc', 'services', 's5_desc', 'text', 'Разработка проекта климатизации для офисов, торговых центров, производственных помещений.'),
+  ('services_s5_price', 'services', 's5_price', 'text', 'по запросу'),
+  ('services_s6_title', 'services', 's6_title', 'text', 'Гарантийное обслуживание'),
+  ('services_s6_desc', 'services', 's6_desc', 'text', 'Полное гарантийное сопровождение на весь период гарантии. Оперативное решение любых вопросов.'),
+  ('services_s6_price', 'services', 's6_price', 'text', 'Бесплатно'),
+  ('services_step1_title', 'services', 'step1_title', 'text', 'Заявка'),
+  ('services_step1_desc', 'services', 'step1_desc', 'text', 'Оставьте заявку или позвоните — ответим в течение 15 минут.'),
+  ('services_step2_title', 'services', 'step2_title', 'text', 'Консультация'),
+  ('services_step2_desc', 'services', 'step2_desc', 'text', 'Специалист подберёт оборудование и рассчитает стоимость.'),
+  ('services_step3_title', 'services', 'step3_title', 'text', 'Монтаж'),
+  ('services_step3_desc', 'services', 'step3_desc', 'text', 'Выезд в удобное время. Установка за 1 рабочий день.'),
+  ('services_step4_title', 'services', 'step4_title', 'text', 'Гарантия'),
+  ('services_step4_desc', 'services', 'step4_desc', 'text', 'Подписываем договор и выдаём гарантийный талон.')
+ON CONFLICT (id) DO NOTHING;
+
+-- О компании
+INSERT INTO t_p31537494_neptune_data_sync_1.cms_content (id, page, section, content_type, value) VALUES
+  ('about_desc', 'about', 'hero_desc', 'text', 'КлиматПро — это команда профессионалов с 10-летним опытом в сфере климатического оборудования. Мы помогаем создать идеальный микроклимат в квартирах, домах и офисах.'),
+  ('about_stat1_value', 'about', 'stat1_value', 'text', '10+'),
+  ('about_stat1_label', 'about', 'stat1_label', 'text', 'Лет на рынке'),
+  ('about_stat2_value', 'about', 'stat2_value', 'text', '2 000+'),
+  ('about_stat2_label', 'about', 'stat2_label', 'text', 'Довольных клиентов'),
+  ('about_stat3_value', 'about', 'stat3_value', 'text', '500+'),
+  ('about_stat3_label', 'about', 'stat3_label', 'text', 'Установок ежегодно'),
+  ('about_stat4_value', 'about', 'stat4_value', 'text', '5 лет'),
+  ('about_stat4_label', 'about', 'stat4_label', 'text', 'Гарантия на монтаж'),
+  ('about_team1_name', 'about', 'team1_name', 'text', 'Александр Петров'),
+  ('about_team1_role', 'about', 'team1_role', 'text', 'Генеральный директор'),
+  ('about_team1_exp', 'about', 'team1_exp', 'text', '15 лет опыта'),
+  ('about_team1_photo', 'about', 'team1_photo', 'image', ''),
+  ('about_team2_name', 'about', 'team2_name', 'text', 'Дмитрий Коваль'),
+  ('about_team2_role', 'about', 'team2_role', 'text', 'Главный инженер'),
+  ('about_team2_exp', 'about', 'team2_exp', 'text', 'Сертификат Daikin'),
+  ('about_team2_photo', 'about', 'team2_photo', 'image', ''),
+  ('about_team3_name', 'about', 'team3_name', 'text', 'Сергей Михайлов'),
+  ('about_team3_role', 'about', 'team3_role', 'text', 'Монтажник-техник'),
+  ('about_team3_exp', 'about', 'team3_exp', 'text', '500+ установок'),
+  ('about_team3_photo', 'about', 'team3_photo', 'image', '')
+ON CONFLICT (id) DO NOTHING;
+
+-- Контакты
+INSERT INTO t_p31537494_neptune_data_sync_1.cms_content (id, page, section, content_type, value) VALUES
+  ('contacts_worktime', 'contacts', 'worktime', 'text', 'Пн–Вс: 8:00–22:00'),
+  ('contacts_worktime_sub', 'contacts', 'worktime_sub', 'text', 'Сервис 24/7'),
+  ('contacts_phone_sub', 'contacts', 'phone_sub', 'text', 'Звонок бесплатный'),
+  ('contacts_email_sub', 'contacts', 'email_sub', 'text', 'Отвечаем в течение часа'),
+  ('contacts_address_sub', 'contacts', 'address_sub', 'text', 'Пн–Вс: 8:00–22:00')
+ON CONFLICT (id) DO NOTHING;
+
+-- Каталог
+INSERT INTO t_p31537494_neptune_data_sync_1.cms_content (id, page, section, content_type, value) VALUES
+  ('catalog_title', 'catalog', 'hero_title', 'text', 'Наш каталог'),
+  ('catalog_subtitle', 'catalog', 'hero_subtitle', 'text', 'Официальные поставки. Гарантия производителя. Монтаж в подарок при покупке.'),
+  ('catalog_p1_brand', 'catalog', 'p1_brand', 'text', 'Daikin'),
+  ('catalog_p1_model', 'catalog', 'p1_model', 'text', 'FTXB25C'),
+  ('catalog_p1_power', 'catalog', 'p1_power', 'text', '2.5 кВт'),
+  ('catalog_p1_area', 'catalog', 'p1_area', 'text', 'до 25 м²'),
+  ('catalog_p1_price', 'catalog', 'p1_price', 'text', '42 000'),
+  ('catalog_p1_badge', 'catalog', 'p1_badge', 'text', 'Хит'),
+  ('catalog_p2_brand', 'catalog', 'p2_brand', 'text', 'Mitsubishi'),
+  ('catalog_p2_model', 'catalog', 'p2_model', 'text', 'MSZ-LN25VG'),
+  ('catalog_p2_power', 'catalog', 'p2_power', 'text', '2.5 кВт'),
+  ('catalog_p2_area', 'catalog', 'p2_area', 'text', 'до 25 м²'),
+  ('catalog_p2_price', 'catalog', 'p2_price', 'text', '56 000'),
+  ('catalog_p2_badge', 'catalog', 'p2_badge', 'text', 'Премиум'),
+  ('catalog_p3_brand', 'catalog', 'p3_brand', 'text', 'Samsung'),
+  ('catalog_p3_model', 'catalog', 'p3_model', 'text', 'AR09TXHQASI'),
+  ('catalog_p3_power', 'catalog', 'p3_power', 'text', '2.6 кВт'),
+  ('catalog_p3_area', 'catalog', 'p3_area', 'text', 'до 26 м²'),
+  ('catalog_p3_price', 'catalog', 'p3_price', 'text', '35 000'),
+  ('catalog_p3_badge', 'catalog', 'p3_badge', 'text', ''),
+  ('catalog_p4_brand', 'catalog', 'p4_brand', 'text', 'Daikin'),
+  ('catalog_p4_model', 'catalog', 'p4_model', 'text', 'FCAG60A'),
+  ('catalog_p4_power', 'catalog', 'p4_power', 'text', '6.0 кВт'),
+  ('catalog_p4_area', 'catalog', 'p4_area', 'text', 'до 55 м²'),
+  ('catalog_p4_price', 'catalog', 'p4_price', 'text', '95 000'),
+  ('catalog_p4_badge', 'catalog', 'p4_badge', 'text', 'Для офиса'),
+  ('catalog_p5_brand', 'catalog', 'p5_brand', 'text', 'Mitsubishi'),
+  ('catalog_p5_model', 'catalog', 'p5_model', 'text', 'SEZ-M50DA'),
+  ('catalog_p5_power', 'catalog', 'p5_power', 'text', '5.0 кВт'),
+  ('catalog_p5_area', 'catalog', 'p5_area', 'text', 'до 50 м²'),
+  ('catalog_p5_price', 'catalog', 'p5_price', 'text', '85 000'),
+  ('catalog_p5_badge', 'catalog', 'p5_badge', 'text', ''),
+  ('catalog_p6_brand', 'catalog', 'p6_brand', 'text', 'Daikin'),
+  ('catalog_p6_model', 'catalog', 'p6_model', 'text', '3MXM68A'),
+  ('catalog_p6_power', 'catalog', 'p6_power', 'text', '6.8 кВт'),
+  ('catalog_p6_area', 'catalog', 'p6_area', 'text', '3 комнаты'),
+  ('catalog_p6_price', 'catalog', 'p6_price', 'text', '120 000'),
+  ('catalog_p6_badge', 'catalog', 'p6_badge', 'text', 'Новинка')
+ON CONFLICT (id) DO NOTHING;

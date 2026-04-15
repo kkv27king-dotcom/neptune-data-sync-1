@@ -2,6 +2,7 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import Header from "@/components/Header"
 import Icon from "@/components/ui/icon"
+import { useCms } from "@/hooks/useCms"
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -15,6 +16,7 @@ const fadeUp = {
 const SEND_LEAD_URL = "https://functions.poehali.dev/8cae795d-5611-43e6-878d-96ab29f86c26"
 
 export default function Contacts() {
+  const { get } = useCms("contacts")
   const [form, setForm] = useState({ name: "", phone: "", message: "" })
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -41,6 +43,13 @@ export default function Contacts() {
       setLoading(false)
     }
   }
+
+  const contactItems = [
+    { icon: "Phone", title: "Телефон", value: get("contacts_phone", "+7 (924) 935-83-88"), sub: get("contacts_phone_sub", "Звонок бесплатный") },
+    { icon: "Mail", title: "Email", value: get("contacts_email", "info@klimatpro.ru"), sub: get("contacts_email_sub", "Отвечаем в течение часа") },
+    { icon: "MapPin", title: "Адрес", value: get("contacts_address", "г. Хабаровск, ул. Слободская, 16"), sub: get("contacts_address_sub", "Пн–Вс: 8:00–22:00") },
+    { icon: "Clock", title: "Режим работы", value: get("contacts_worktime", "Пн–Вс: 8:00–22:00"), sub: get("contacts_worktime_sub", "Сервис 24/7") },
+  ]
 
   return (
     <div className="min-h-screen bg-[#020c1b] text-white">
@@ -75,15 +84,9 @@ export default function Contacts() {
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Form */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            custom={1}
-            variants={fadeUp}
-          >
+          <motion.div initial="hidden" animate="visible" custom={1} variants={fadeUp}>
             <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
               <h2 className="text-xl font-semibold mb-6">Оставить заявку</h2>
-
               {sent ? (
                 <div className="flex flex-col items-center justify-center py-12 text-center">
                   <div className="w-16 h-16 rounded-full bg-sky-500/20 flex items-center justify-center mb-4">
@@ -126,9 +129,7 @@ export default function Contacts() {
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-sky-500 transition-colors text-sm resize-none"
                     />
                   </div>
-                  {error && (
-                    <p className="text-red-400 text-sm text-center">{error}</p>
-                  )}
+                  {error && <p className="text-red-400 text-sm text-center">{error}</p>}
                   <button
                     type="submit"
                     disabled={loading}
@@ -142,21 +143,10 @@ export default function Contacts() {
           </motion.div>
 
           {/* Contact info */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            custom={2}
-            variants={fadeUp}
-            className="flex flex-col gap-6"
-          >
-            {[
-              { icon: "Phone", title: "Телефон", value: "+7 (924) 935-83-88", sub: "Звонок бесплатный" },
-              { icon: "Mail", title: "Email", value: "info@klimatpro.ru", sub: "Отвечаем в течение часа" },
-              { icon: "MapPin", title: "Адрес", value: "г. Хабаровск, ул. Слободская, 16", sub: "Пн–Вс: 8:00–22:00" },
-              { icon: "Clock", title: "Режим работы", value: "Пн–Вс: 8:00–22:00", sub: "Сервис 24/7" },
-            ].map((c, i) => (
+          <motion.div initial="hidden" animate="visible" custom={2} variants={fadeUp} className="flex flex-col gap-6">
+            {contactItems.map((c, i) => (
               <motion.div
-                key={c.title}
+                key={i}
                 initial="hidden"
                 animate="visible"
                 custom={i + 2}

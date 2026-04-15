@@ -12,60 +12,27 @@ const fadeUp = {
   }),
 }
 
-const services = [
-  {
-    icon: "Package",
-    title: "Продажа оборудования",
-    desc: "Официальные поставки кондиционеров Daikin, Mitsubishi Electric, Samsung, LG. Широкий выбор моделей для любых задач и бюджетов.",
-    items: ["Настенные сплит-системы", "Кассетные и канальные", "Мультизональные системы", "Промышленное оборудование"],
-    price: "от 25 000 ₽",
-  },
-  {
-    icon: "Wrench",
-    title: "Монтаж и установка",
-    desc: "Профессиональный монтаж под ключ за 1 день. Соблюдаем все технические нормы и требования производителя.",
-    items: ["Разметка и прокладка трасс", "Установка внешнего блока", "Подключение и пуско-наладка", "Уборка после монтажа"],
-    price: "от 5 000 ₽",
-  },
-  {
-    icon: "Settings",
-    title: "Сервисное обслуживание",
-    desc: "Регулярное техническое обслуживание продлевает срок службы оборудования и обеспечивает его эффективную работу.",
-    items: ["Чистка фильтров и теплообменников", "Проверка давления фреона", "Диагностика электроники", "Профилактические работы"],
-    price: "от 2 500 ₽",
-  },
-  {
-    icon: "Zap",
-    title: "Ремонт кондиционеров",
-    desc: "Быстрый ремонт любой сложности. Выезд в день обращения. Работаем со всеми марками и моделями.",
-    items: ["Заправка фреоном", "Замена компрессора", "Ремонт платы управления", "Устранение утечек"],
-    price: "от 1 500 ₽",
-  },
-  {
-    icon: "Building2",
-    title: "Проектирование",
-    desc: "Разработка проекта климатизации для офисов, торговых центров, производственных помещений.",
-    items: ["Расчёт тепловой нагрузки", "Подбор оборудования", "Схемы монтажа", "Техническая документация"],
-    price: "по запросу",
-  },
-  {
-    icon: "BadgeCheck",
-    title: "Гарантийное обслуживание",
-    desc: "Полное гарантийное сопровождение на весь период гарантии. Оперативное решение любых вопросов.",
-    items: ["Гарантия на монтаж 5 лет", "Гарантия на оборудование", "Бесплатный выезд по гарантии", "Замена неисправного блока"],
-    price: "Бесплатно",
-  },
-]
-
-const steps = [
-  { num: "01", title: "Заявка", desc: "Оставьте заявку или позвоните — ответим в течение 15 минут." },
-  { num: "02", title: "Консультация", desc: "Специалист подберёт оборудование и рассчитает стоимость." },
-  { num: "03", title: "Монтаж", desc: "Выезд в удобное время. Установка за 1 рабочий день." },
-  { num: "04", title: "Гарантия", desc: "Подписываем договор и выдаём гарантийный талон." },
-]
+const SERVICE_ICONS = ["Package", "Wrench", "Settings", "Zap", "Building2", "BadgeCheck"]
 
 export default function Services() {
   const { get } = useCms("services")
+
+  const services = [
+    { icon: SERVICE_ICONS[0], title: get("services_s1_title", "Продажа оборудования"), desc: get("services_s1_desc", ""), price: get("services_s1_price", "от 25 000 ₽") },
+    { icon: SERVICE_ICONS[1], title: get("services_s2_title", "Монтаж и установка"), desc: get("services_s2_desc", ""), price: get("services_s2_price", "от 5 000 ₽") },
+    { icon: SERVICE_ICONS[2], title: get("services_s3_title", "Сервисное обслуживание"), desc: get("services_s3_desc", ""), price: get("services_s3_price", "от 2 500 ₽") },
+    { icon: SERVICE_ICONS[3], title: get("services_s4_title", "Ремонт кондиционеров"), desc: get("services_s4_desc", ""), price: get("services_s4_price", "от 1 500 ₽") },
+    { icon: SERVICE_ICONS[4], title: get("services_s5_title", "Проектирование"), desc: get("services_s5_desc", ""), price: get("services_s5_price", "по запросу") },
+    { icon: SERVICE_ICONS[5], title: get("services_s6_title", "Гарантийное обслуживание"), desc: get("services_s6_desc", ""), price: get("services_s6_price", "Бесплатно") },
+  ]
+
+  const steps = [
+    { num: "01", title: get("services_step1_title", "Заявка"), desc: get("services_step1_desc", "Оставьте заявку или позвоните — ответим в течение 15 минут.") },
+    { num: "02", title: get("services_step2_title", "Консультация"), desc: get("services_step2_desc", "Специалист подберёт оборудование и рассчитает стоимость.") },
+    { num: "03", title: get("services_step3_title", "Монтаж"), desc: get("services_step3_desc", "Выезд в удобное время. Установка за 1 рабочий день.") },
+    { num: "04", title: get("services_step4_title", "Гарантия"), desc: get("services_step4_desc", "Подписываем договор и выдаём гарантийный талон.") },
+  ]
+
   return (
     <div className="min-h-screen bg-[#020c1b] text-white">
       <Header />
@@ -102,7 +69,7 @@ export default function Services() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((s, i) => (
             <motion.div
-              key={s.title}
+              key={i}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -114,15 +81,7 @@ export default function Services() {
                 <Icon name={s.icon} fallback="Star" size={22} className="text-sky-400" />
               </div>
               <h3 className="text-xl font-semibold mb-2">{s.title}</h3>
-              <p className="text-white/50 text-sm leading-relaxed mb-4">{s.desc}</p>
-              <ul className="space-y-1.5 mb-5 flex-1">
-                {s.items.map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-white/60">
-                    <Icon name="Check" size={14} className="text-sky-400 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <p className="text-white/50 text-sm leading-relaxed mb-4 flex-1">{s.desc}</p>
               <div className="flex items-center justify-between pt-4 border-t border-white/10">
                 <span className="text-sky-300 font-semibold">{s.price}</span>
                 <a
