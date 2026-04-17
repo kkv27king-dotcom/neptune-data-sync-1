@@ -64,6 +64,24 @@ export default function Services() {
         </motion.p>
       </section>
 
+      {/* Video */}
+      {get("services_video", "") && (
+        <section className="pb-16 px-6 md:px-16 max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="rounded-2xl overflow-hidden border border-white/10"
+          >
+            <video
+              src={get("services_video", "")}
+              controls
+              className="w-full max-h-[480px] object-cover bg-black"
+            />
+          </motion.div>
+        </section>
+      )}
+
       {/* Services Grid */}
       <section className="pb-20 px-6 md:px-16 max-w-6xl mx-auto">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

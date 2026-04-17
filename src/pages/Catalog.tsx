@@ -38,6 +38,7 @@ export default function Catalog() {
     area: get(`catalog_p${n}_area`, ""),
     price: get(`catalog_p${n}_price`, ""),
     badge: get(`catalog_p${n}_badge`, ""),
+    image: get(`catalog_p${n}_image`, ""),
     features: PRODUCT_FEATURES[i],
   }))
 
@@ -101,12 +102,20 @@ export default function Catalog() {
               variants={fadeUp}
               className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col hover:border-sky-500/40 transition-colors duration-300 group"
             >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-12 h-12 rounded-xl bg-sky-500/20 flex items-center justify-center">
-                  <Icon name="Wind" size={24} className="text-sky-400" />
-                </div>
+              <div className="relative mb-4">
+                {p.image ? (
+                  <img
+                    src={p.image}
+                    alt={`${p.brand} ${p.model}`}
+                    className="w-full h-40 object-cover rounded-xl border border-white/10"
+                  />
+                ) : (
+                  <div className="w-full h-40 rounded-xl bg-sky-500/10 border border-white/10 flex items-center justify-center">
+                    <Icon name="Wind" size={32} className="text-sky-400/40" />
+                  </div>
+                )}
                 {p.badge && (
-                  <span className="px-2 py-0.5 rounded-full bg-sky-500/30 text-sky-300 text-xs font-medium border border-sky-500/30">
+                  <span className="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-sky-500/80 backdrop-blur-sm text-white text-xs font-medium">
                     {p.badge}
                   </span>
                 )}

@@ -72,6 +72,26 @@ export default function About() {
         </motion.p>
       </section>
 
+      {/* Video */}
+      {get("about_video", "") && (
+        <section className="px-6 md:px-16 pb-16 max-w-6xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
+            variants={fadeUp}
+            className="rounded-2xl overflow-hidden border border-white/10"
+          >
+            <video
+              src={get("about_video", "")}
+              controls
+              className="w-full max-h-[480px] object-cover bg-black"
+            />
+          </motion.div>
+        </section>
+      )}
+
       {/* Stats */}
       <section className="px-6 md:px-16 pb-20 max-w-6xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">

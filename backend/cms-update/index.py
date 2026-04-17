@@ -28,24 +28,64 @@ def verify_token(token: str, schema: str) -> bool:
     return row is not None
 
 
-def upload_image(data_b64: str, filename: str) -> str:
-    data = base64.b64decode(data_b64)
-    s3 = boto3.client(
+def get_s3():
+    return boto3.client(
         "s3",
         endpoint_url="https://bucket.poehali.dev",
         aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"],
         aws_secret_access_key=os.environ["AWS_SECRET_ACCESS_KEY"],
     )
+
+
+def upload_file(data_b64: str, filename: str, content_type: str) -> str:
+    data = base64.b64decode(data_b64)
+    s3 = get_s3()
     key = f"cms/{filename}"
-    ext = filename.rsplit(".", 1)[-1].lower()
-    content_type = "image/jpeg" if ext in ("jpg", "jpeg") else f"image/{ext}"
     s3.put_object(Bucket="files", Key=key, Body=data, ContentType=content_type)
     access_key = os.environ["AWS_ACCESS_KEY_ID"]
     return f"https://cdn.poehali.dev/projects/{access_key}/bucket/{key}"
 
 
+def process_media(value: str, content_id: str, content_type: str) -> str:
+    if not value.startswith("data:"):
+        return value
+
+    parts = value.split(",", 1)
+    if len(parts) != 2:
+        return value
+
+    header = parts[0]
+    b64data = parts[1]
+
+    if content_type == "image":
+        ext = "jpg"
+        if "png" in header:
+            ext = "png"
+        elif "webp" in header:
+            ext = "webp"
+        elif "gif" in header:
+            ext = "gif"
+        mime = f"image/{ext}" if ext != "jpg" else "image/jpeg"
+        filename = f"{content_id}.{ext}"
+        return upload_file(b64data, filename, mime)
+
+    elif content_type == "video":
+        ext = "mp4"
+        if "webm" in header:
+            ext = "webm"
+        elif "ogg" in header:
+            ext = "ogg"
+        elif "quicktime" in header:
+            ext = "mov"
+        mime = f"video/{ext}" if ext != "mp4" else "video/mp4"
+        filename = f"{content_id}.{ext}"
+        return upload_file(b64data, filename, mime)
+
+    return value
+
+
 def handler(event: dict, context) -> dict:
-    """Обновление контента сайта КлиматПро из админ-панели."""
+    """Обновление контента сайта КлиматПро из админ-панели. Поддерживает текст, изображения и видео."""
     if event.get("httpMethod") == "OPTIONS":
         return {"statusCode": 200, "headers": CORS, "body": ""}
 
@@ -54,7 +94,7 @@ def handler(event: dict, context) -> dict:
     schema = os.environ.get("MAIN_DB_SCHEMA", "public")
 
     if not verify_token(token, schema):
-        return {"statusCode": 401, "headers": CORS, "body": {"error": "Нет доступа"}}
+        return {"statusCode": 401, "headers": CORS, "body": json.dumps({"error": "Нет доступа"})}
 
     body = json.loads(event.get("body") or "{}")
     updates = body.get("updates", {})
@@ -66,18 +106,8 @@ def handler(event: dict, context) -> dict:
         value = update.get("value", "")
         content_type = update.get("type", "text")
 
-        if content_type == "image" and value.startswith("data:"):
-            # strip data URL prefix: data:image/jpeg;base64,....
-            parts = value.split(",", 1)
-            if len(parts) == 2:
-                b64data = parts[1]
-                ext = "jpg"
-                if "png" in parts[0]:
-                    ext = "png"
-                elif "webp" in parts[0]:
-                    ext = "webp"
-                filename = f"{content_id}.{ext}"
-                value = upload_image(b64data, filename)
+        if content_type in ("image", "video") and value.startswith("data:"):
+            value = process_media(value, content_id, content_type)
 
         cur.execute(
             f"UPDATE {schema}.cms_content SET value = %s, updated_at = NOW() WHERE id = %s",
@@ -88,4 +118,4 @@ def handler(event: dict, context) -> dict:
     cur.close()
     conn.close()
 
-    return {"statusCode": 200, "headers": CORS, "body": {"ok": True}}
+    return {"statusCode": 200, "headers": CORS, "body": json.dumps({"ok": True})}

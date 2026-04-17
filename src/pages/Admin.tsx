@@ -16,14 +16,14 @@ const PAGE_LABELS: Record<string, string> = {
 
 const PAGE_GROUPS: Record<string, Array<{ label: string; ids: string[] }>> = {
   index: [
-    { label: "Главный экран", ids: ["index_hero_title", "index_hero_subtitle", "index_hero_image"] },
+    { label: "Главный экран", ids: ["index_hero_title", "index_hero_subtitle", "index_hero_image", "index_hero_video"] },
     { label: "Статистика (цифры)", ids: ["index_stat1_value", "index_stat1_label", "index_stat2_value", "index_stat2_label", "index_stat3_value", "index_stat3_label"] },
     { label: "Преимущества", ids: ["index_adv1_title", "index_adv1_desc", "index_adv2_title", "index_adv2_desc", "index_adv3_title", "index_adv3_desc", "index_adv4_title", "index_adv4_desc"] },
     { label: "Блок «Что мы делаем»", ids: ["index_services_title", "index_serv1_title", "index_serv1_desc", "index_serv2_title", "index_serv2_desc", "index_serv3_title", "index_serv3_desc"] },
     { label: "CTA-баннер", ids: ["index_cta_title", "index_cta_desc"] },
   ],
   services: [
-    { label: "Заголовок страницы", ids: ["services_title", "services_subtitle"] },
+    { label: "Заголовок страницы", ids: ["services_title", "services_subtitle", "services_video"] },
     { label: "Услуга 1", ids: ["services_s1_title", "services_s1_desc", "services_s1_price"] },
     { label: "Услуга 2", ids: ["services_s2_title", "services_s2_desc", "services_s2_price"] },
     { label: "Услуга 3", ids: ["services_s3_title", "services_s3_desc", "services_s3_price"] },
@@ -33,7 +33,7 @@ const PAGE_GROUPS: Record<string, Array<{ label: string; ids: string[] }>> = {
     { label: "Шаги работы", ids: ["services_step1_title", "services_step1_desc", "services_step2_title", "services_step2_desc", "services_step3_title", "services_step3_desc", "services_step4_title", "services_step4_desc"] },
   ],
   about: [
-    { label: "Заголовок страницы", ids: ["about_title", "about_desc", "about_image"] },
+    { label: "Заголовок страницы", ids: ["about_title", "about_desc", "about_image", "about_video"] },
     { label: "Статистика (цифры)", ids: ["about_stat1_value", "about_stat1_label", "about_stat2_value", "about_stat2_label", "about_stat3_value", "about_stat3_label", "about_stat4_value", "about_stat4_label"] },
     { label: "Сотрудник 1", ids: ["about_team1_name", "about_team1_role", "about_team1_exp", "about_team1_photo"] },
     { label: "Сотрудник 2", ids: ["about_team2_name", "about_team2_role", "about_team2_exp", "about_team2_photo"] },
@@ -44,12 +44,12 @@ const PAGE_GROUPS: Record<string, Array<{ label: string; ids: string[] }>> = {
   ],
   catalog: [
     { label: "Заголовок страницы", ids: ["catalog_title", "catalog_subtitle"] },
-    { label: "Товар 1", ids: ["catalog_p1_brand", "catalog_p1_model", "catalog_p1_power", "catalog_p1_area", "catalog_p1_price", "catalog_p1_badge"] },
-    { label: "Товар 2", ids: ["catalog_p2_brand", "catalog_p2_model", "catalog_p2_power", "catalog_p2_area", "catalog_p2_price", "catalog_p2_badge"] },
-    { label: "Товар 3", ids: ["catalog_p3_brand", "catalog_p3_model", "catalog_p3_power", "catalog_p3_area", "catalog_p3_price", "catalog_p3_badge"] },
-    { label: "Товар 4", ids: ["catalog_p4_brand", "catalog_p4_model", "catalog_p4_power", "catalog_p4_area", "catalog_p4_price", "catalog_p4_badge"] },
-    { label: "Товар 5", ids: ["catalog_p5_brand", "catalog_p5_model", "catalog_p5_power", "catalog_p5_area", "catalog_p5_price", "catalog_p5_badge"] },
-    { label: "Товар 6", ids: ["catalog_p6_brand", "catalog_p6_model", "catalog_p6_power", "catalog_p6_area", "catalog_p6_price", "catalog_p6_badge"] },
+    { label: "Товар 1", ids: ["catalog_p1_image", "catalog_p1_brand", "catalog_p1_model", "catalog_p1_power", "catalog_p1_area", "catalog_p1_price", "catalog_p1_badge"] },
+    { label: "Товар 2", ids: ["catalog_p2_image", "catalog_p2_brand", "catalog_p2_model", "catalog_p2_power", "catalog_p2_area", "catalog_p2_price", "catalog_p2_badge"] },
+    { label: "Товар 3", ids: ["catalog_p3_image", "catalog_p3_brand", "catalog_p3_model", "catalog_p3_power", "catalog_p3_area", "catalog_p3_price", "catalog_p3_badge"] },
+    { label: "Товар 4", ids: ["catalog_p4_image", "catalog_p4_brand", "catalog_p4_model", "catalog_p4_power", "catalog_p4_area", "catalog_p4_price", "catalog_p4_badge"] },
+    { label: "Товар 5", ids: ["catalog_p5_image", "catalog_p5_brand", "catalog_p5_model", "catalog_p5_power", "catalog_p5_area", "catalog_p5_price", "catalog_p5_badge"] },
+    { label: "Товар 6", ids: ["catalog_p6_image", "catalog_p6_brand", "catalog_p6_model", "catalog_p6_power", "catalog_p6_area", "catalog_p6_price", "catalog_p6_badge"] },
   ],
 }
 
@@ -81,12 +81,15 @@ const FIELD_LABELS: Record<string, string> = {
   team1_name: "Имя", team1_role: "Должность", team1_exp: "Опыт", team1_photo: "Фото",
   team2_name: "Имя", team2_role: "Должность", team2_exp: "Опыт", team2_photo: "Фото",
   team3_name: "Имя", team3_role: "Должность", team3_exp: "Опыт", team3_photo: "Фото",
-  p1_brand: "Бренд", p1_model: "Модель", p1_power: "Мощность", p1_area: "Площадь", p1_price: "Цена (₽)", p1_badge: "Метка",
-  p2_brand: "Бренд", p2_model: "Модель", p2_power: "Мощность", p2_area: "Площадь", p2_price: "Цена (₽)", p2_badge: "Метка",
-  p3_brand: "Бренд", p3_model: "Модель", p3_power: "Мощность", p3_area: "Площадь", p3_price: "Цена (₽)", p3_badge: "Метка",
-  p4_brand: "Бренд", p4_model: "Модель", p4_power: "Мощность", p4_area: "Площадь", p4_price: "Цена (₽)", p4_badge: "Метка",
-  p5_brand: "Бренд", p5_model: "Модель", p5_power: "Мощность", p5_area: "Площадь", p5_price: "Цена (₽)", p5_badge: "Метка",
-  p6_brand: "Бренд", p6_model: "Модель", p6_power: "Мощность", p6_area: "Площадь", p6_price: "Цена (₽)", p6_badge: "Метка",
+  p1_image: "Фото товара", p1_brand: "Бренд", p1_model: "Модель", p1_power: "Мощность", p1_area: "Площадь", p1_price: "Цена (₽)", p1_badge: "Метка",
+  p2_image: "Фото товара", p2_brand: "Бренд", p2_model: "Модель", p2_power: "Мощность", p2_area: "Площадь", p2_price: "Цена (₽)", p2_badge: "Метка",
+  p3_image: "Фото товара", p3_brand: "Бренд", p3_model: "Модель", p3_power: "Мощность", p3_area: "Площадь", p3_price: "Цена (₽)", p3_badge: "Метка",
+  p4_image: "Фото товара", p4_brand: "Бренд", p4_model: "Модель", p4_power: "Мощность", p4_area: "Площадь", p4_price: "Цена (₽)", p4_badge: "Метка",
+  p5_image: "Фото товара", p5_brand: "Бренд", p5_model: "Модель", p5_power: "Мощность", p5_area: "Площадь", p5_price: "Цена (₽)", p5_badge: "Метка",
+  p6_image: "Фото товара", p6_brand: "Бренд", p6_model: "Модель", p6_power: "Мощность", p6_area: "Площадь", p6_price: "Цена (₽)", p6_badge: "Метка",
+  hero_video: "Видео (фоновое)",
+  about_video: "Видео о компании",
+  services_video: "Видео об услугах",
 }
 
 function getFieldLabel(id: string): string {
@@ -205,7 +208,7 @@ export default function Admin() {
     }
   }
 
-  function handleImageChange(id: string, file: File) {
+  function handleMediaChange(id: string, file: File) {
     const reader = new FileReader()
     reader.onload = (e) => {
       const dataUrl = e.target?.result as string
@@ -332,10 +335,12 @@ export default function Admin() {
                       const label = getFieldLabel(id)
                       const isTextarea = id.includes("desc") || id.includes("subtitle") || id.includes("_sub")
                       const isImage = item.type === "image"
+                      const isVideo = item.type === "video"
 
                       return (
                         <div key={id}>
                           <label className="block text-xs text-white/50 mb-1">{label}</label>
+
                           {isImage ? (
                             <div className="space-y-2">
                               {item.value && (
@@ -345,7 +350,7 @@ export default function Admin() {
                                 onClick={() => fileRefs.current[id]?.click()}
                                 className="flex items-center justify-center gap-2 w-full py-2 rounded-lg border-2 border-dashed border-white/20 text-white/40 text-sm hover:border-sky-500/50 hover:text-sky-400 cursor-pointer transition-colors"
                               >
-                                <Icon name="Upload" size={14} />
+                                <Icon name="ImagePlus" size={14} />
                                 {item.value ? "Заменить фото" : "Загрузить фото"}
                               </div>
                               <input
@@ -355,10 +360,49 @@ export default function Admin() {
                                 className="hidden"
                                 onChange={(e) => {
                                   const file = e.target.files?.[0]
-                                  if (file) handleImageChange(id, file)
+                                  if (file) handleMediaChange(id, file)
                                 }}
                               />
                             </div>
+
+                          ) : isVideo ? (
+                            <div className="space-y-2">
+                              {item.value && (
+                                <video
+                                  src={item.value}
+                                  controls
+                                  className="w-full max-h-40 rounded-lg border border-white/10 bg-black"
+                                />
+                              )}
+                              <div
+                                onClick={() => fileRefs.current[id]?.click()}
+                                className="flex items-center justify-center gap-2 w-full py-2 rounded-lg border-2 border-dashed border-white/20 text-white/40 text-sm hover:border-purple-500/50 hover:text-purple-400 cursor-pointer transition-colors"
+                              >
+                                <Icon name="Video" size={14} />
+                                {item.value ? "Заменить видео" : "Загрузить видео"}
+                              </div>
+                              {item.value && (
+                                <button
+                                  onClick={() => updateField(id, "")}
+                                  className="flex items-center gap-1 text-xs text-red-400/70 hover:text-red-400 transition-colors"
+                                >
+                                  <Icon name="Trash2" size={12} />
+                                  Удалить видео
+                                </button>
+                              )}
+                              <input
+                                ref={(el) => { fileRefs.current[id] = el }}
+                                type="file"
+                                accept="video/*"
+                                className="hidden"
+                                onChange={(e) => {
+                                  const file = e.target.files?.[0]
+                                  if (file) handleMediaChange(id, file)
+                                }}
+                              />
+                              <p className="text-xs text-white/30">Форматы: MP4, WebM, MOV. Рекомендуется до 50 МБ.</p>
+                            </div>
+
                           ) : isTextarea ? (
                             <textarea
                               value={item.value}
