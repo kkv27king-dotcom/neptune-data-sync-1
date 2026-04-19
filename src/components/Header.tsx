@@ -1,8 +1,13 @@
 import { useState } from "react"
 import Icon from "@/components/ui/icon"
+import { useCms } from "@/hooks/useCms"
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { get } = useCms()
+
+  const companyName = get("site_company_name", "КлиматПро")
+  const logoImage = get("site_logo_image", "")
 
   const links = [
     { href: "/", label: "Главная" },
@@ -16,8 +21,12 @@ export default function Header() {
     <header className="absolute top-0 left-0 right-0 z-50 px-6 py-5">
       <div className="flex justify-between items-center max-w-6xl mx-auto">
         <a href="/" className="flex items-center gap-2">
-          <Icon name="Wind" size={22} className="text-sky-400" />
-          <span className="text-white text-base font-semibold tracking-wide">КлиматПро</span>
+          {logoImage ? (
+            <img src={logoImage} alt={companyName} className="h-8 w-auto object-contain" />
+          ) : (
+            <Icon name="Wind" size={22} className="text-sky-400" />
+          )}
+          <span className="text-white text-base font-semibold tracking-wide">{companyName}</span>
         </a>
 
         {/* Desktop nav */}

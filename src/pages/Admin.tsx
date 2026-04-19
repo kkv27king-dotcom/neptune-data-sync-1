@@ -7,6 +7,7 @@ const CMS_GET_URL = "https://functions.poehali.dev/0c232c8c-e2c7-4ca9-89c9-a79f5
 const CMS_UPDATE_URL = "https://functions.poehali.dev/d81c4f5f-3817-44ff-9800-d1af4f11fb9d"
 
 const PAGE_LABELS: Record<string, string> = {
+  global: "Общие",
   index: "Главная",
   services: "Услуги",
   about: "О компании",
@@ -15,6 +16,9 @@ const PAGE_LABELS: Record<string, string> = {
 }
 
 const PAGE_GROUPS: Record<string, Array<{ label: string; ids: string[] }>> = {
+  global: [
+    { label: "Логотип и название", ids: ["site_company_name", "site_logo_image"] },
+  ],
   index: [
     { label: "Главный экран", ids: ["index_hero_title", "index_hero_subtitle", "index_hero_image", "index_hero_video"] },
     { label: "Статистика (цифры)", ids: ["index_stat1_value", "index_stat1_label", "index_stat2_value", "index_stat2_label", "index_stat3_value", "index_stat3_label"] },
@@ -54,6 +58,8 @@ const PAGE_GROUPS: Record<string, Array<{ label: string; ids: string[] }>> = {
 }
 
 const FIELD_LABELS: Record<string, string> = {
+  site_company_name: "Название компании",
+  site_logo_image: "Логотип",
   hero_title: "Заголовок", hero_subtitle: "Подзаголовок", hero_image: "Фото баннера", hero_desc: "Описание",
   phone: "Телефон", phone_sub: "Подпись под телефоном", address: "Адрес", address_sub: "Подпись под адресом",
   email: "Email", email_sub: "Подпись под email", worktime: "Режим работы", worktime_sub: "Подпись",
