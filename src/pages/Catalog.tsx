@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
+import { useNavigate } from "react-router-dom"
 import Header from "@/components/Header"
 import Icon from "@/components/ui/icon"
 import { useCms } from "@/hooks/useCms"
@@ -9,13 +10,20 @@ const fadeUp = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, delay: i * 0.1 },
+    transition: { duration: 0.5, delay: (i % 9) * 0.07 },
   }),
 }
 
 const categories = ["Все", "Настенные", "Кассетные", "Канальные", "Мульти-сплит"]
 
-const PRODUCT_CATEGORIES = ["Настенные", "Настенные", "Настенные", "Кассетные", "Канальные", "Мульти-сплит"]
+const PRODUCT_CATEGORIES = [
+  "Настенные", "Настенные", "Настенные", "Кассетные", "Канальные", "Мульти-сплит",
+  "Настенные", "Настенные", "Кассетные", "Кассетные", "Канальные", "Канальные",
+  "Мульти-сплит", "Мульти-сплит", "Настенные", "Настенные", "Кассетные", "Кассетные",
+  "Канальные", "Канальные", "Мульти-сплит", "Настенные", "Настенные", "Кассетные",
+  "Канальные", "Мульти-сплит", "Настенные", "Кассетные", "Канальные", "Мульти-сплит",
+]
+
 const PRODUCT_FEATURES = [
   ["Инвертор", "Wi-Fi", "A++"],
   ["Инвертор", "Quiet Mode", "A+++"],
@@ -23,24 +31,53 @@ const PRODUCT_FEATURES = [
   ["4-х поточный", "Инвертор", "A++"],
   ["Скрытый монтаж", "Инвертор", "A+"],
   ["3 внутр. блока", "Инвертор", "A++"],
+  ["Инвертор", "Wi-Fi", "A++"],
+  ["Инвертор", "Turbo", "A+"],
+  ["4-х поточный", "Wi-Fi", "A++"],
+  ["Инвертор", "Auto-clean", "A+++"],
+  ["Скрытый монтаж", "Wi-Fi", "A++"],
+  ["Канальный", "Инвертор", "A+"],
+  ["4 внутр. блока", "Инвертор", "A++"],
+  ["3 внутр. блока", "Wi-Fi", "A+"],
+  ["Инвертор", "Plasma", "A++"],
+  ["Инвертор", "Wi-Fi", "A+"],
+  ["4-х поточный", "Инвертор", "A++"],
+  ["Кассетный", "Auto-clean", "A+"],
+  ["Канальный", "Wi-Fi", "A++"],
+  ["Инвертор", "Quiet Mode", "A+"],
+  ["5 внутр. блоков", "Wi-Fi", "A++"],
+  ["Инвертор", "A+++", "Wi-Fi"],
+  ["Инвертор", "Turbo", "A++"],
+  ["4-х поточный", "Auto-clean", "A+"],
+  ["Скрытый монтаж", "Инвертор", "A++"],
+  ["3 внутр. блока", "Wi-Fi", "A+"],
+  ["Инвертор", "Plasma", "A++"],
+  ["Кассетный", "Wi-Fi", "A+"],
+  ["Канальный", "Инвертор", "A++"],
+  ["4 внутр. блока", "Инвертор", "A+"],
 ]
 
 export default function Catalog() {
   const { get } = useCms("catalog")
   const [active, setActive] = useState("Все")
+  const navigate = useNavigate()
 
-  const products = [1, 2, 3, 4, 5, 6].map((n, i) => ({
-    id: n,
-    category: PRODUCT_CATEGORIES[i],
-    brand: get(`catalog_p${n}_brand`, ""),
-    model: get(`catalog_p${n}_model`, ""),
-    power: get(`catalog_p${n}_power`, ""),
-    area: get(`catalog_p${n}_area`, ""),
-    price: get(`catalog_p${n}_price`, ""),
-    badge: get(`catalog_p${n}_badge`, ""),
-    image: get(`catalog_p${n}_image`, ""),
-    features: PRODUCT_FEATURES[i],
-  }))
+  const products = Array.from({ length: 30 }, (_, i) => {
+    const n = i + 1
+    return {
+      id: n,
+      category: PRODUCT_CATEGORIES[i],
+      brand: get(`catalog_p${n}_brand`, ""),
+      model: get(`catalog_p${n}_model`, `Товар ${n}`),
+      power: get(`catalog_p${n}_power`, ""),
+      area: get(`catalog_p${n}_area`, ""),
+      price: get(`catalog_p${n}_price`, ""),
+      badge: get(`catalog_p${n}_badge`, ""),
+      image: get(`catalog_p${n}_image`, ""),
+      desc: get(`catalog_p${n}_desc`, ""),
+      features: PRODUCT_FEATURES[i],
+    }
+  })
 
   const filtered = active === "Все" ? products : products.filter((p) => p.category === active)
 
@@ -100,7 +137,8 @@ export default function Catalog() {
               animate="visible"
               custom={i}
               variants={fadeUp}
-              className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col hover:border-sky-500/40 transition-colors duration-300 group"
+              onClick={() => navigate(`/catalog/${p.id}`)}
+              className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col hover:border-sky-500/40 transition-colors duration-300 group cursor-pointer"
             >
               <div className="relative mb-4">
                 {p.image ? (
@@ -122,19 +160,24 @@ export default function Catalog() {
               </div>
 
               <div className="mb-3">
-                <p className="text-sky-400 text-xs font-medium uppercase tracking-wider mb-1">{p.brand}</p>
+                {p.brand && <p className="text-sky-400 text-xs font-medium uppercase tracking-wider mb-1">{p.brand}</p>}
                 <h3 className="text-xl font-semibold">{p.model}</h3>
+                <p className="text-xs text-white/40 mt-1">{p.category}</p>
               </div>
 
               <div className="flex gap-4 mb-4">
-                <div className="text-sm text-white/50">
-                  <span className="block text-white/80 font-medium">{p.power}</span>
-                  <span className="text-xs">Мощность</span>
-                </div>
-                <div className="text-sm text-white/50">
-                  <span className="block text-white/80 font-medium">{p.area}</span>
-                  <span className="text-xs">Площадь</span>
-                </div>
+                {p.power && (
+                  <div className="text-sm text-white/50">
+                    <span className="block text-white/80 font-medium">{p.power}</span>
+                    <span className="text-xs">Мощность</span>
+                  </div>
+                )}
+                {p.area && (
+                  <div className="text-sm text-white/50">
+                    <span className="block text-white/80 font-medium">{p.area}</span>
+                    <span className="text-xs">Площадь</span>
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-wrap gap-2 mb-5">
@@ -145,15 +188,17 @@ export default function Catalog() {
 
               <div className="mt-auto flex items-center justify-between">
                 <div>
-                  <span className="text-2xl font-bold text-sky-300">{p.price}</span>
-                  <span className="text-white/40 text-sm"> ₽</span>
+                  {p.price && (
+                    <>
+                      <span className="text-2xl font-bold text-sky-300">{p.price}</span>
+                      <span className="text-white/40 text-sm"> ₽</span>
+                    </>
+                  )}
                 </div>
-                <a
-                  href="/contacts"
-                  className="px-4 py-2 rounded-full bg-sky-500 text-white text-xs font-medium hover:bg-sky-400 transition-colors"
-                >
-                  Заказать
-                </a>
+                <span className="px-4 py-2 rounded-full bg-sky-500 text-white text-xs font-medium group-hover:bg-sky-400 transition-colors inline-flex items-center gap-1">
+                  Подробнее
+                  <Icon name="ArrowRight" size={12} />
+                </span>
               </div>
             </motion.div>
           ))}

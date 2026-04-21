@@ -48,12 +48,10 @@ const PAGE_GROUPS: Record<string, Array<{ label: string; ids: string[] }>> = {
   ],
   catalog: [
     { label: "Заголовок страницы", ids: ["catalog_title", "catalog_subtitle"] },
-    { label: "Товар 1", ids: ["catalog_p1_image", "catalog_p1_brand", "catalog_p1_model", "catalog_p1_power", "catalog_p1_area", "catalog_p1_price", "catalog_p1_badge"] },
-    { label: "Товар 2", ids: ["catalog_p2_image", "catalog_p2_brand", "catalog_p2_model", "catalog_p2_power", "catalog_p2_area", "catalog_p2_price", "catalog_p2_badge"] },
-    { label: "Товар 3", ids: ["catalog_p3_image", "catalog_p3_brand", "catalog_p3_model", "catalog_p3_power", "catalog_p3_area", "catalog_p3_price", "catalog_p3_badge"] },
-    { label: "Товар 4", ids: ["catalog_p4_image", "catalog_p4_brand", "catalog_p4_model", "catalog_p4_power", "catalog_p4_area", "catalog_p4_price", "catalog_p4_badge"] },
-    { label: "Товар 5", ids: ["catalog_p5_image", "catalog_p5_brand", "catalog_p5_model", "catalog_p5_power", "catalog_p5_area", "catalog_p5_price", "catalog_p5_badge"] },
-    { label: "Товар 6", ids: ["catalog_p6_image", "catalog_p6_brand", "catalog_p6_model", "catalog_p6_power", "catalog_p6_area", "catalog_p6_price", "catalog_p6_badge"] },
+    ...Array.from({ length: 30 }, (_, i) => {
+      const n = i + 1
+      return { label: `Товар ${n}`, ids: [`catalog_p${n}_image`, `catalog_p${n}_brand`, `catalog_p${n}_model`, `catalog_p${n}_power`, `catalog_p${n}_area`, `catalog_p${n}_price`, `catalog_p${n}_badge`, `catalog_p${n}_desc`] }
+    }),
   ],
 }
 
@@ -87,12 +85,16 @@ const FIELD_LABELS: Record<string, string> = {
   team1_name: "Имя", team1_role: "Должность", team1_exp: "Опыт", team1_photo: "Фото",
   team2_name: "Имя", team2_role: "Должность", team2_exp: "Опыт", team2_photo: "Фото",
   team3_name: "Имя", team3_role: "Должность", team3_exp: "Опыт", team3_photo: "Фото",
-  p1_image: "Фото товара", p1_brand: "Бренд", p1_model: "Модель", p1_power: "Мощность", p1_area: "Площадь", p1_price: "Цена (₽)", p1_badge: "Метка",
-  p2_image: "Фото товара", p2_brand: "Бренд", p2_model: "Модель", p2_power: "Мощность", p2_area: "Площадь", p2_price: "Цена (₽)", p2_badge: "Метка",
-  p3_image: "Фото товара", p3_brand: "Бренд", p3_model: "Модель", p3_power: "Мощность", p3_area: "Площадь", p3_price: "Цена (₽)", p3_badge: "Метка",
-  p4_image: "Фото товара", p4_brand: "Бренд", p4_model: "Модель", p4_power: "Мощность", p4_area: "Площадь", p4_price: "Цена (₽)", p4_badge: "Метка",
-  p5_image: "Фото товара", p5_brand: "Бренд", p5_model: "Модель", p5_power: "Мощность", p5_area: "Площадь", p5_price: "Цена (₽)", p5_badge: "Метка",
-  p6_image: "Фото товара", p6_brand: "Бренд", p6_model: "Модель", p6_power: "Мощность", p6_area: "Площадь", p6_price: "Цена (₽)", p6_badge: "Метка",
+  ...Object.fromEntries(
+    Array.from({ length: 30 }, (_, i) => {
+      const n = i + 1
+      return [
+        [`p${n}_image`, "Фото товара"], [`p${n}_brand`, "Бренд"], [`p${n}_model`, "Модель"],
+        [`p${n}_power`, "Мощность"], [`p${n}_area`, "Площадь"], [`p${n}_price`, "Цена (₽)"],
+        [`p${n}_badge`, "Метка"], [`p${n}_desc`, "Описание"],
+      ]
+    }).flat()
+  ),
   hero_video: "Видео (фоновое)",
   about_video: "Видео о компании",
   services_video: "Видео об услугах",
